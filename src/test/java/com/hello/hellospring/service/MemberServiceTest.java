@@ -54,8 +54,4 @@ class MemberServiceTest {
         assertThrows(IllegalStateException.class, ()->memberService.join(member2));
         //then
     }
-
-    @Test
-    void findOne() {
-    }
 }

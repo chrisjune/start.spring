@@ -1,13 +1,11 @@
 package com.hello.hellospring.service;
 
 import com.hello.hellospring.domain.Member;
-import com.hello.hellospring.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.assertj.core.api.Assertions.*;
 
@@ -15,20 +13,19 @@ import static org.assertj.core.api.Assertions.*;
 @Transactional
 public class MemberServiceIntegrationTest {
     @Autowired MemberService memberService;
-    @Autowired MemberRepository memberRepository;
+//    @Autowired MemberRepository memberRepository;
 
     @Test
     public void 회원가입() throws Exception {
-        // Given
-        Member member = new Member();
-        member.setName("hello");
+        Member member1 = new Member();
+        member1.setName("spring");
 
-        // When
-        Long saveId = memberService.join(member);
+        // when
+        Long savedId = memberService.join(member1);
 
-        // Then
-        Member findMember = memberRepository.findById(saveId).get();
-        assertEquals(member.getName(), findMember.getName());
+        // then
+        Member findMember = memberService.findOne(savedId).get();
+        assertThat(findMember).isEqualTo(member1);
     }
 
     @Test
